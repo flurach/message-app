@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="darkcyan">
+    <title>Message App</title>
+
+    <!-- FONT AWESOME -->
+    <script src="https://kit.fontawesome.com/d30b73d2d0.js"></script>
+
+    <style>
+/* DEFAULTS */
+* {
+    margin: 0px;
+    padding: 0px;
+    outline: 0px;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+/* ROOT */
+#root {
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 70px auto 45px 10px;
+    transition: .5s;
+
+    background-image: url('img/bg.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(3px);
+}
+
+/* Login page */
+#login-page {
+    z-index: 1000;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 139, 139, .5);
+    transition: .5s;
+}
+#login-page .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#login-page p {
+    padding-bottom: 10px;
+    font-size: 35px;
+    text-align: center;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+}
+#login-page input {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 50px;
+    border: none;
+
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+#login-page button {
+    margin-top: 5px;
+    margin-left: 25%;
+    padding: 8px 10px;
+    width: 50%;
+    border: 1px solid cyan;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, .1);
+    transition: .25s;
+
+    text-transform: uppercase;
+    font-weight: 300;
+    color: white;
+}
+#login-page button:hover {
+    background-color: cyan;
+    color: black;
+}
+
+/* Header */
+header {
+    background: darkcyan;
+    display: table;
+}
+header h1 {
+    padding: 15px;
+    font-size: 25px;
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 300;
+}
+
+/* Messages */
+#messages {
+    overflow: auto;
+    padding-bottom: 5px;
+}
+
+/* Message */
+div.message {
+    display: inline-block;
+    width: calc(100%);
+}
+div.message .inner {
+    position: relative;
+    margin-top: 5px;
+    padding: 8px 10px;
+    background: white;
+    border-radius: 3px;
+}
+div.message .inner .sender {
+    padding-right: 35px;
+    margin-bottom: 3px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: red;
+    font-size: 15px;
+}
+div.message .inner .content {
+    padding-right: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+    float: left;
+}
+div.message .inner .time {
+    position: absolute;
+    bottom: 7px;
+    right: 10px;
+    float: left;
+
+    color: gray;
+    font-weight: bold;
+    font-size: 11px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div.someones.message .decor {
+    position: absolute;
+    top: 10px;
+    left: -7px;
+    width: 14px;
+    height: 14px;
+    border-radius: 0px 3px;
+    background: white;
+
+    transform: rotate(45deg);
+    z-index: 1;
+}
+div.someones.message .inner {
+    float: left;
+    margin-left: 20px;
+}
+
+div.my.message .inner {
+    float: right;
+    margin-right: 20px;
+    background: cyan;
+}
+div.my.message .sender {
+    display: none;
+}
+div.my.message .decor {
+    position: absolute;
+    top: 10px;
+    right: -7px;
+    width: 14px;
+    height: 14px;
+    border-radius: 0px 3px;
+    background: cyan;
+
+    transform: rotate(45deg);
+    z-index: 1;
+}
+
+div.message.continue .inner { margin-top: 0px; }
+div.message.continue .sender { display: none; }
+div.message.continue .decor { display: none; }
+
+/* INPUT */
+#input {
+    display: grid;
+    grid-template-columns: auto 45px 10px;
+}
+#input input {
+    margin-left: 10px;
+    margin-right: 5px;
+    height: 100%;
+    border: none;
+    border-radius: 25px;
+
+    text-indent: 20px;
+    font-size: 17px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#input button {
+    padding-top: 3px;
+    padding-right: 3px;
+    margin: 0px;
+    height: 100%;
+    border: none;
+    border-radius: 50%;
+    background: darkcyan;
+    transition: 0.15s;
+
+    color: white;
+    font-size: 20px;
+}
+    </style>
+</head>
+<body>
+
+    <!-- Login -->
+    <div id="login-page">
+        <div class="center">
+            <p>Adın nedir?</p>
+            <input id="username" type="text" placeholder="İsmin">
+            <button id="set-username">tamam</button>
+            <!-- <p style="padding-top: 10px; font-size: 13px;" align="center">Yukarıdaki butona bastıktan sonra yeni mesajları bildirim almak istersen bildirimlere izin verebilirsin 😊</p> -->
+        </div>
+    </div>
+
+    <div id="root">
+
+        <!-- Header -->
+        <header>
+            <h1>Messages</h1>
+        </header>
+
+        <!-- Message List -->
+        <div id="messages">
+
+            <!-- Message Example -->
+            <!--
+                <div class="my message">
+                    <div class="inner">
+                        <div class="decor"></div>
+                        <p class="sender">Sender</p>
+                        <p class="content">Content</p>
+                    </div>
+                </div>
+            -->
+
+        </div>
+
+        <!-- Footer -->
+        <div id="input">
+            <input id="message-box" type="text">
+            <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
+    <script>
+// Constants
+let socket = io();
+let root = document.getElementById('root');
+let messages = document.getElementById('messages');
+let message_box = document.getElementById('message-box');
+
+// State
+let last_sender = undefined;
+
+// Reviece messages
+socket.on('message', data => {
+    messages.innerHTML += `
+        <div class="${data.sender == localStorage.ME ? 'my' : 'someones'} message ${data.sender == last_sender ? 'continue' : ''}">
+            <div class="inner">
+                <div class="decor"></div>
+                <p class="sender">${data.sender}</p>
+                <p class="content">
+                    ${data.content}
+                    <p class="time">${data.time}</p>                    
+                </p>
+            </div>
+        </div>
+    `;
+
+    if (messages.scrollTop > messages.scrollHeight - messages.clientHeight - 100)
+        messages.scrollTop = messages.scrollHeight;
+
+    last_sender = data.sender;
+})
+
+// Send messages
+let send_message = document.getElementById('send-message');
+send_message.onclick = function() {
+    let message_value = message_box.value.trim();
+    let date = new Date();
+
+    if (message_value != '')
+        socket.emit('message', {
+            'sender': localStorage.ME,
+            'content': message_value,
+            'time': `${date.getHours()}:${date.getMinutes()}`
+        });
+
+    message_box.value = '';
+};
+addEventListener('keyup', event =>
+    event.keyCode == 13 ? send_message.onclick() : {}
+);
+
+// Login
+let login_page = document.getElementById('login-page');
+let username_input = document.getElementById('username');
+let set_username_btn = document.getElementById('set-username');
+
+set_username_btn.onclick = function() {
+    if (username_input.value.trim() != '') {
+        localStorage.ME = username_input.value;
+        username_input.value = '';
+
+        login_page.style.left = '200%';
+        root.style.filter = 'blur(0px)';
+    }
+};
+
+// Initial
+window.onload = function() {
+
+    // Check login
+    if (localStorage.ME != undefined) {
+        login_page.style.display = 'none';
+        root.style.filter = 'blur(0px)';
+    }
+
+};
+    </script>
+</body>
+</html>
