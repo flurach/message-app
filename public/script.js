@@ -16,7 +16,7 @@ socket.on('message', data => {
                 <p class="sender">${data.sender}</p>
                 <p class="content">
                     ${data.content}
-                    <p class="time">${data.time}</p>                    
+                    <p class="time">${data.time}</p>
                 </p>
             </div>
         </div>
@@ -30,7 +30,7 @@ socket.on('message', data => {
 
 // Send messages
 let send_message = document.getElementById('send-message');
-send_message.onclick = function() {
+send_message.onclick = function () {
     let message_value = message_box.value.trim();
     let date = new Date();
 
@@ -52,7 +52,7 @@ let login_page = document.getElementById('login-page');
 let username_input = document.getElementById('username');
 let set_username_btn = document.getElementById('set-username');
 
-set_username_btn.onclick = function() {
+set_username_btn.onclick = function () {
     if (username_input.value.trim() != '') {
         localStorage.ME = username_input.value;
         username_input.value = '';
@@ -63,7 +63,7 @@ set_username_btn.onclick = function() {
 };
 
 // Initial
-window.onload = function() {
+window.onload = function () {
 
     // Check login
     if (localStorage.ME != undefined) {
