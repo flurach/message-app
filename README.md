@@ -13,3 +13,10 @@ npm start
 Then go to link __http://localhost:8080__
 
 Done 👌️
+
+## Images
+### Desktop
+<img src="desktop.png">
+
+### Mobile
+<img src="mobile.png" style="display: block">
