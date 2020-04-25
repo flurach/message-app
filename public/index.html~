@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="darkcyan">
+    <title>Message App</title>
+
+    <!-- FONT AWESOME -->
+    <script src="https://kit.fontawesome.com/d30b73d2d0.js"></script>
+
+    <!-- STYLE -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Login -->
+    <div id="login-page">
+        <div class="center">
+            <p>Adın nedir?</p>
+            <input id="username" type="text" placeholder="İsmin">
+            <button id="set-username">tamam</button>
+            <!-- <p style="padding-top: 10px; font-size: 13px;" align="center">Yukarıdaki butona bastıktan sonra yeni mesajları bildirim almak istersen bildirimlere izin verebilirsin 😊</p> -->
+        </div>
+    </div>
+
+    <div id="root">
+
+        <!-- Header -->
+        <header>
+            <h1>Messages</h1>
+        </header>
+
+        <!-- Message List -->
+        <div id="messages">
+
+            <!-- Message Example -->
+            <!--
+                <div class="my message">
+                    <div class="inner">
+                        <div class="decor"></div>
+                        <p class="sender">Sender</p>
+                        <p class="content">Content</p>
+                    </div>
+                </div>
+            -->
+
+        </div>
+
+        <!-- Footer -->
+        <div id="input">
+            <input id="message-box" type="text" placeholder="Type here...">
+            <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
