@@ -94,6 +94,7 @@ header h1 {
     font-weight: 300;
 }
 #peopleCounter {
+    font-weight: bold;
     color: tomato;
 }
 #peopleCounter.active {
