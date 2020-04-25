@@ -23,5 +23,5 @@ io.on('connection', socket => {
 
 
 // listen
-const PORT = process.PORT || 8080
+const PORT = process.env.PORT || 8080
 http.listen(PORT, () => console.log(`Server listening on port ${PORT}`))
