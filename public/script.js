@@ -47,6 +47,17 @@ addEventListener('keyup', event =>
     event.keyCode == 13 ? send_message.onclick() : {}
 );
 
+// online counter
+socket.on('peopleCount', count => {
+	const counter = document.querySelector('#peopleCounter')
+	counter.innerHTML = `Çevrimiçi (${count - 1})`
+
+	if (count - 1 === 0)
+		counter.classList.remove('active')
+	else
+		counter.classList.add('active')
+});
+
 // Login
 let login_page = document.getElementById('login-page');
 let username_input = document.getElementById('username');
